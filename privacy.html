@@ -22,6 +22,40 @@
   a{color:var(--gold-1);}
   .back{display:inline-block;margin-bottom:28px;color:var(--ink-dim);text-decoration:underline;text-decoration-color:var(--line);font-size:14px;}
 </style>
+<!-- Yandex.Metrika counter -->
+<script>
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();
+for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+ym(113810657, "init", {clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true});
+(function(){
+  function goal(n, p){ try{ ym(113810657, "reachGoal", n, p || {}); }catch(e){} }
+  function byUrl(u){
+    u = String(u || "");
+    if (/tribute|prodamus|payform|yookassa|yoomoney|robokassa|cloudpayments|getcourse/i.test(u)) return "klik_oplata";
+    if (/t\.me\/|telegram\./i.test(u)) return "klik_telegram";
+    if (/max\.ru/i.test(u)) return "klik_max";
+    if (/wa\.me|whatsapp/i.test(u)) return "klik_whatsapp";
+    if (/vk\.(com|me)\//i.test(u)) return "klik_vk";
+  }
+  var CH = {tg:"klik_telegram", telegram:"klik_telegram", max:"klik_max", wa:"klik_whatsapp", whatsapp:"klik_whatsapp", vk:"klik_vk"};
+  document.addEventListener("submit", function(){ goal("calc_submit"); }, true);
+  document.addEventListener("click", function(ev){
+    if (!ev.target.closest) return;
+    var b = ev.target.closest("[data-ch]");
+    if (b && CH[b.getAttribute("data-ch")]) { goal(CH[b.getAttribute("data-ch")]); return; }
+    var a = ev.target.closest("a[href]");
+    var g = a && byUrl(a.href);
+    if (g) goal(g, {url: a.href.slice(0, 200)});
+  }, true);
+  var wo = window.open;
+  window.open = function(u){ var g = byUrl(u); if (g) goal(g, {url: String(u).slice(0, 200)}); return wo.apply(window, arguments); };
+})();
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/113810657" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
 </head>
 <body>
 <div class="wrap">
