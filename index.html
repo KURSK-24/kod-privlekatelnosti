@@ -188,6 +188,47 @@ ym(113810657, "init", {clickmap:true, trackLinks:true, accurateTrackBounce:true,
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/113810657" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
+<!-- Цели воронки калькулятора -->
+<script>
+(function(){
+  var ID=113810657, MIN_READ=15000, done={};
+  function goal(n,p){ try{ ym(ID,"reachGoal",n,p||{}); }catch(e){} }
+  function once(n,p){ if(done[n]) return; done[n]=1; goal(n,p); }
+  function where(el){
+    if(el.id) return el.id;
+    var s=el.closest("section,.sticky,.sticky-cta,.lock,.offer"); return s ? (s.id || s.className.split(" ")[0]) : "page";
+  }
+  document.addEventListener("click", function(ev){
+    if(!ev.target.closest) return;
+    var a=ev.target.closest("a[href*='tribute']");
+    if(a){ goal("klik_klub", {mesto: where(a)}); return; }
+    var b=ev.target.closest(".more,.lcta,.club-link,.here");
+    if(b) goal("klub_otkryla", {mesto: b.getAttribute("data-p") || where(b)});
+  }, true);
+  function start(){
+    var res=document.getElementById("result");
+    if(!res || !("IntersectionObserver" in window)) return;
+    var end=document.createElement("div"); end.setAttribute("aria-hidden","true"); end.style.height="1px";
+    res.appendChild(end);
+    var shownAt=0, endSeen=false;
+    function read(){ if(shownAt && endSeen && Date.now()-shownAt>=MIN_READ) once("dochitala"); }
+    var io=new IntersectionObserver(function(list){
+      list.forEach(function(e){
+        if(!e.isIntersecting) return;
+        if(e.target===res && !shownAt){ shownAt=Date.now(); once("rezultat_pokazan"); setTimeout(read, MIN_READ+100); }
+        else if(e.target===end){ endSeen=true; read(); }
+        else if(e.target!==res){ once("uvidela_cenu"); }
+      });
+    });
+    io.observe(res); io.observe(end);
+    var price=document.querySelector("#club .offer, #price");
+    if(price) io.observe(price);
+  }
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded", start); else start();
+})();
+</script>
+<!-- /Цели воронки калькулятора -->
+
 </head>
 <body>
 
